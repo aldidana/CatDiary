@@ -16,6 +16,7 @@ var passportConfig = require('./config/passport');
 //route controller
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var diary = require('./routes/diary');
 
 //another config
 var secret = require('./config/secret');
@@ -69,6 +70,10 @@ app.post('/register', users.postRegister);
 app.get('/logout', users.logout);
 app.get('/profile', users.getProfile);
 app.post('/profile', users.updateProfile);
+
+app.get('/diary', diary.getDiary);
+app.get('/diary/new', diary.getNewDiary);
+app.post('/diary/new', diary.postNewDiary);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
