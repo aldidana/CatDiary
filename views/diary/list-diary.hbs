@@ -1,6 +1,17 @@
 <h2>{{title}}</h2>
-<ul>
-{{#each data}}
-<li>{{this.title}} - {{this.post}}</li>
-{{/each}}
-</ul>
+
+<section id="cd-timeline" class="cd-container">
+	{{#each data}}
+		<div class="cd-timeline-block">
+			<div class="cd-timeline-img cd-picture">
+				<img src="img/cd-icon-picture.svg" alt="Picture">
+			</div> <!-- cd-timeline-img -->
+			<div class="cd-timeline-content">
+				<h2>{{this.title}}</h2>
+				<p>{{this.post}}</p>
+				<a href="#0" class="cd-read-more">Read more</a>
+				<span class="cd-date">{{relativeTime this.date}}</span>
+			</div> <!-- cd-timeline-content -->
+		</div> <!-- cd-timeline-block -->
+	{{/each}}
+</section>

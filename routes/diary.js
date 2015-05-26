@@ -1,10 +1,16 @@
 var passport = require('passport');
 var Diary = require('../models/Diary');
 var User = require('../models/User');
+var moment = require('moment');
+var hbs = require('hbs');
+
+hbs.registerHelper('relativeTime', function(date) {
+  return moment(date).fromNow();
+})
 
 exports.getDiary = function(req, res, next) {
   if (!req.user) return res.redirect('/login');
-  Diary.find({user: req.user.id}, function(err, doc) {
+  Diary.find({user: req.user.id}).sort({date: 'desc'}).exec(function(err, doc) {
     console.log(doc);
     if (err) return next(err);
     res.render('diary/list-diary', {
@@ -12,6 +18,8 @@ exports.getDiary = function(req, res, next) {
       data: doc
     });
   });
+  // Diary.find({user: req.user.id}, function(err, doc) {
+  // });
 }
 
 exports.getNewDiary = function(req, res, next) {
