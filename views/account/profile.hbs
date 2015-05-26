@@ -1,0 +1,41 @@
+<form class="form-horizontal" action="/profile" method="POST">
+  <input type="hidden" name="_csrf" value="{{_csrf}}">
+  <fieldset>
+    <legend>Your Profile</legend>
+    {{#if messages.errors}}
+      {{#each messages.errors}}
+      <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+          <strong>Oh snap!</strong> {{ this.msg }}
+      </div>
+      {{/each}}
+    {{/if}}
+    <div class="form-group">
+      <label for="email" class="col-lg-2 control-label">Email</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="email" name="email" value="{{user.email}}">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="name" class="col-lg-2 control-label">Name</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="name" name="name" value="{{user.profile.name}}">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password" class="col-lg-2 control-label">Cat</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="cat" name="cat" value="{{user.profile.cat}}">
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="reset" class="btn btn-default">Cancel</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </fieldset>
+</form>

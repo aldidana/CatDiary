@@ -1,0 +1,11 @@
+<h2>Welcome to {{title}}</h2>
+
+{{#with user}}
+	{{#if profile.name}}
+		<p>Hello {{profile.name}}</p>
+	{{else}}
+		{{email}}
+		<p>Please fill up your profile name</p>
+
+	{{/if}}
+{{/with}}
