@@ -1,6 +1,6 @@
 <h2>{{title}}</h2>
 
-<form class="form-horizontal" action="/diary/new" method="POST">
+<form class="form-horizontal" enctype="multipart/form-data" action="/diary/new" method="POST">
   <input type="hidden" name="_csrf" value="{{_csrf}}">
   <fieldset>
     {{#if messages.errors}}
@@ -19,9 +19,34 @@
     </div>
 
     <div class="form-group">
-      <label for="post" class="col-lg-2 control-label">Post</label>
+      <label for="photo" class="col-lg-2 control-label">Photo</label>
       <div class="col-lg-10">
-        <input type="text" class="form-control" id="post" name="post">
+        <input type="file" class="form-control" id="photo" name="photo">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="caption" class="col-lg-2 control-label">Caption</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="caption" name="caption">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-lg-2 control-label">Share this for:</label>
+      <div class="col-lg-10">
+        <div class="radio">
+          <label>
+            <input type="radio" name="shareOptions" id="private" value="private" checked="">
+            Private
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="shareOptions" id="public" value="public">
+            Public
+          </label>
+        </div>
       </div>
     </div>
 

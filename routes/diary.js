@@ -6,16 +6,19 @@ var hbs = require('hbs');
 
 hbs.registerHelper('relativeTime', function(date) {
   return moment(date).fromNow();
+});
+
+hbs.registerHelper('dateMonthYear', function(date) {
+  return moment(date).format('DD-MMM-YYYY, h:mm:ss a');
 })
 
 exports.getDiary = function(req, res, next) {
-  if (!req.user) return res.redirect('/login');
-  Diary.find({user: req.user.id}).sort({date: 'desc'}).exec(function(err, doc) {
-    console.log(doc);
+  Diary.find({user: req.user.id}).sort({date: 'desc'}).exec(function(err, docs) {
+    console.log(docs);
     if (err) return next(err);
     res.render('diary/list-diary', {
       title: "My Cat Diary",
-      data: doc
+      data: docs
     });
   });
   // Diary.find({user: req.user.id}, function(err, doc) {
@@ -23,22 +26,29 @@ exports.getDiary = function(req, res, next) {
 }
 
 exports.getNewDiary = function(req, res, next) {
-  if (!req.user) return res.redirect('/login');
   res.render('diary/new-diary', {
     title: 'Create New Diary'
   });
 }
 
 exports.postNewDiary = function(req, res, next) {
+  req.assert('title', 'Email is not valid').notEmpty();
+  req.assert('photo', 'Password cannot be blank').notEmpty();
+  req.assert('post', 'Password cannot be blank').notEmpty();
+
+  var photoPath = 'uploads/'
+  if (done == true)
   var diary = new Diary({
     title: req.body.title,
-    post: req.body.post,
+    caption: req.body.caption,
     date: new Date(),
-    user: req.user.id
+    user: req.user.id,
+    photo: photoPath + req.files.photo.name,
+    share: req.body.shareOptions
   });
 
   diary.save(function(err, doc) {
     if (err) return console.error(err);
-    res.redirect('/');
+    res.redirect('/diary');
   });
 }

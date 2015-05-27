@@ -14,10 +14,12 @@
     "express-validator": "^2.10.0",
     "hbs": "~2.9.0",
     "helmet": "^0.9.0",
+    "lodash": "^3.9.3",
     "lusca": "^1.1.0",
     "moment": "^2.10.3",
     "mongoose": "^4.0.3",
     "morgan": "~1.5.1",
+    "multer": "^0.1.8",
     "passport": "^0.2.2",
     "passport-local": "^1.0.0",
     "serve-favicon": "~2.2.0"

@@ -8,9 +8,10 @@
 			</div> <!-- cd-timeline-img -->
 			<div class="cd-timeline-content">
 				<h2>{{this.title}}</h2>
-				<p>{{this.post}}</p>
+				<img src="{{this.photo}}">
+				<p>{{this.caption}}</p>
 				<a href="#0" class="cd-read-more">Read more</a>
-				<span class="cd-date">{{relativeTime this.date}}</span>
+				<span class="cd-date">{{relativeTime this.date}} | {{dateMonthYear this.date}}</span>
 			</div> <!-- cd-timeline-content -->
 		</div> <!-- cd-timeline-block -->
 	{{/each}}

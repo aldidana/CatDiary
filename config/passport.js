@@ -26,7 +26,7 @@ passport.use(new localStrategy({ usernameField: 'email' }, function(email, passw
 	});
 }));
 
-exports.isAuthenticated = function(req, res, next) {
+exports.ensureAuthenticated = function(req, res, next) {
 	if (req.isAuthenticated()) return next();
 	res.redirect('/login');
 }

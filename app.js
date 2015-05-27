@@ -11,6 +11,7 @@ var mongoose = require('mongoose');
 var lusca = require('lusca');
 var expressValidator = require('express-validator');
 var flash = require('express-flash');
+var multer = require('multer');
 
 var passportConfig = require('./config/passport');
 //route controller
@@ -28,6 +29,19 @@ mongoose.connect(secret.mongo);
 mongoose.connection.on('error', function() {
   console.error('MongoDB Connection Error. Please make sure that MongoDB is running.');
 });
+
+app.use(multer({dest: './public/uploads/',
+  rename: function(filedname, filename) {
+    return filename+Date.now();
+  },
+  onFileUploadStart: function(file) {
+    console.log(file.originalname + ' is starting ...')
+  },
+  onFileUploadComplete: function(file) {
+    console.log("finish" + file.path);
+    done = true;
+  }
+}));
 
 app.set('port', process.env.PORT || 3000);
 // view engine setup
@@ -68,12 +82,12 @@ app.post('/login', users.postLogin);
 app.get('/register', users.getRegister);
 app.post('/register', users.postRegister);
 app.get('/logout', users.logout);
-app.get('/profile', users.getProfile);
-app.post('/profile', users.updateProfile);
+app.get('/profile', passportConfig.ensureAuthenticated, users.getProfile);
+app.post('/profile', passportConfig.ensureAuthenticated, users.updateProfile);
 
-app.get('/diary', diary.getDiary);
-app.get('/diary/new', diary.getNewDiary);
-app.post('/diary/new', diary.postNewDiary);
+app.get('/diary', passportConfig.ensureAuthenticated, diary.getDiary);
+app.get('/diary/new', passportConfig.ensureAuthenticated, diary.getNewDiary);
+app.post('/diary/new', passportConfig.ensureAuthenticated, diary.postNewDiary);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

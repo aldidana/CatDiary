@@ -1,6 +1,6 @@
 <h2>Welcome to {{title}}</h2>
 
-{{#with user}}
+{{!-- {{#with user}}
 	{{#if profile.name}}
 		<p>Hello {{profile.name}}</p>
 	{{else}}
@@ -8,4 +8,26 @@
 		<p>Please fill up your profile name</p>
 
 	{{/if}}
-{{/with}}
+{{/with}} --}}
+
+{{#each data}}
+
+<div class="col-xs-6 col-sm-4 col-md-3">
+  <div class="blog-item">
+    <a href="blog-single.html" class="blog-img"><img src="{{photo}}" class="img-responsive" alt="" /></a>
+    <div class="blog-details">
+      <h4 class="blog-title"><a href="">{{title}}</a></h4>
+      <ul class="blog-meta">
+        <li>By: <a href="">{{user.profile.name}}</a></li>
+        <li>Jan 03, 2014</li>
+        <li><a href="">2 Comments</a></li>
+      </ul>
+      <div class="blog-summary">
+        <p>{{caption}}</p>
+        <button class="btn btn-sm btn-white">Read More</button>
+      </div>
+    </div>
+  </div><!-- blog-item -->
+</div><!-- col-xs-6 -->
+
+{{/each}}
