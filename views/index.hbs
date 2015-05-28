@@ -10,16 +10,19 @@
 	{{/if}}
 {{/with}} --}}
 
+<div class="grid">
+
+
 {{#each data}}
 
-<div class="col-xs-6 col-sm-4 col-md-3">
+{{!-- <div class="col-xs-6 col-sm-4 col-md-3">
   <div class="blog-item">
     <a href="blog-single.html" class="blog-img"><img src="{{photo}}" class="img-responsive" alt="" /></a>
     <div class="blog-details">
       <h4 class="blog-title"><a href="">{{title}}</a></h4>
       <ul class="blog-meta">
         <li>By: <a href="">{{user.profile.name}}</a></li>
-        <li>Jan 03, 2014</li>
+        <li>{{dateMonthYear date}}</li>
         <li><a href="">2 Comments</a></li>
       </ul>
       <div class="blog-summary">
@@ -28,6 +31,25 @@
       </div>
     </div>
   </div><!-- blog-item -->
-</div><!-- col-xs-6 -->
+</div><!-- col-xs-6 --> --}}
+
+
+
+
+
+					<figure class="effect-kira">
+						<img src="{{photo}}" width="480" height="360" alt=""/>
+						<figcaption>
+						{{title}} || {{dateMonthYear date}}
+							<p>
+								<a href="#"><i class="fa fa-fw fa-home"></i></a>
+								<a href="#"><i class="fa fa-fw fa-download"></i></a>
+								<a href="#"><i class="fa fa-fw fa-heart"></i></a>
+								<a href="#"><i class="fa fa-fw fa-share"></i></a>
+							</p>
+						{{caption}}
+						</figcaption>			
+					</figure>
 
 {{/each}}
+</div>

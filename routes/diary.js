@@ -8,12 +8,16 @@ hbs.registerHelper('relativeTime', function(date) {
   return moment(date).fromNow();
 });
 
-hbs.registerHelper('dateMonthYear', function(date) {
+hbs.registerHelper('dateMonthYearHour', function(date) {
   return moment(date).format('DD-MMM-YYYY, h:mm:ss a');
 })
 
+hbs.registerHelper('dateMonthYear', function(date) {
+  return moment(date).format('DD MMM, YYYY');
+})
+
 exports.getDiary = function(req, res, next) {
-  Diary.find({user: req.user.id}).sort({date: 'desc'}).exec(function(err, docs) {
+  Diary.find({user: req.user.id}).sort({_id: -1}).exec(function(err, docs) {
     console.log(docs);
     if (err) return next(err);
     res.render('diary/list-diary', {
